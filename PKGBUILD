@@ -306,7 +306,7 @@ build() {
     npm \
       pack
     mv \
-      "${_pkg_npm}-${pkgver}.tgz" \
+      "${_pkg_npm}-v${pkgver}.tgz" \
       "${srcdir}"
   fi
 }
@@ -320,10 +320,11 @@ package() {
     --prefix
       "${pkgdir}/usr"
   )
-  cd "${srcdir}"
+  cd \
+    "${srcdir}"
   install \
     -Dm644 \
-    LICENSE \
+    "LICENSE" \
     "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
   if [[ "${_npm}" == "true" ]]; then
     _npmdir="${pkgdir}/usr/lib/node_modules/"
@@ -337,9 +338,11 @@ package() {
         "${_npm_opts[@]}" \
         "${srcdir}/${_tarfile}"
   elif [[ "${_npm}" == "false" ]]; then
+    ls \
+      -lsh
     npm \
       install \
       "${_npm_options[@]}" \
-      "${srcdir}/${_pkg}-${_pkgver}.tgz"
+      "${srcdir}/${_pkg_npm}-v${_pkgver}.tgz"
   fi
 }
