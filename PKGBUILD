@@ -113,7 +113,7 @@ pkgname=(
 )
 pkgver=6.13.2
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=16
+pkgrel=17
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
@@ -274,6 +274,42 @@ if [[ "${_npm}" == "true" ]]; then
   )
 fi
 
+build() {
+  # local \
+  #   _files=()
+  # _files+=(
+  #   "AUTHORS.rst"
+  #   "COPYING"
+  #   "README.md"
+  #   "eslint.config.mjs"
+  #   "fs-worker"
+  #   "fs-worker.webpack.config.cjs"
+  #   "man"
+  #   "opfs"
+  #   "package.json"
+  # )
+  if [[ "${_npm}" == "false" ]]; then
+    cd \
+      "${_tarname}"
+    # mkdir \
+    #   -p \
+    #   "build"
+    # cp \
+    #   -r \
+    #   "${_files[@]}" \
+    #   "build"
+    # cd \
+    #   "build"
+    npm \
+      install
+    npm \
+      pack
+    mv \
+      "${_pkg}-${_pkgver}.tgz" \
+      "${srcdir}"
+  fi
+}
+
 package() {
   local \
     _npmdir \
@@ -288,14 +324,21 @@ package() {
     -Dm644 \
     LICENSE \
     "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
-  _npmdir="${pkgdir}/usr/lib/node_modules/"
-  mkdir \
-    -p \
-    "${_npmdir}"
-  cd \
-    "${_npmdir}"
-  npm \
-    install \
-      "${_npm_opts[@]}" \
-      "${srcdir}/${_tarfile}"
+  if [[ "${_npm}" == "true" ]]; then
+    _npmdir="${pkgdir}/usr/lib/node_modules/"
+    mkdir \
+      -p \
+      "${_npmdir}"
+    cd \
+      "${_npmdir}"
+    npm \
+      install \
+        "${_npm_opts[@]}" \
+        "${srcdir}/${_tarfile}"
+  elif [[ "${_npm}" == "false" ]]; then
+    npm \
+      install \
+      "${_npm_options[@]}" \
+      "${srcdir}/${_pkg}-${_pkgver}.tgz"
+  fi
 }
