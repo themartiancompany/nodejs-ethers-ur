@@ -114,7 +114,7 @@ pkgname=(
 )
 pkgver=6.13.2
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=21
+pkgrel=22
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
@@ -305,8 +305,10 @@ build() {
       install
     npm \
       pack
+    ls \
+      -lsh
     mv \
-      "${_pkg_npm}-v${pkgver}.tgz" \
+      "${_pkg_npm}-${pkgver}.tgz" \
       "${srcdir}"
   fi
 }
@@ -343,6 +345,6 @@ package() {
     npm \
       install \
       "${_npm_options[@]}" \
-      "${srcdir}/${_pkg_npm}-v${_pkgver}.tgz"
+      "${srcdir}/${_pkg_npm}-${_pkgver}.tgz"
   fi
 }
