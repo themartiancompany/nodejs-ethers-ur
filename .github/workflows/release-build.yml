@@ -1620,6 +1620,8 @@ jobs:
         run: |
           export \
             _pkgbase="$( \
+              _evmfs="false" \
+              _git_service="github" \
               recipe-get \
                 "PKGBUILD" \
                 "pkgbase")"

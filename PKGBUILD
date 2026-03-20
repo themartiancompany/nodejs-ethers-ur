@@ -107,10 +107,13 @@ if [[ ! -v "_archive_format" ]]; then
 fi
 _node="nodejs"
 _pkg=ethers
-pkgname="${_node}-${_pkg}"
+pkgbase="${_node}-${_pkg}"
+pkgname=(
+  "${pkgbase}"
+)
 pkgver=6.13.2
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=15
+pkgrel=16
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
@@ -131,12 +134,8 @@ depends=(
 )
 makedepends=(
   "${_node}"
+  "npm"
 )
-if [[ "${_os}" == "GNU/Linux" ]]; then
-  makedepends+=(
-    'npm'
-  )
-fi
 if [[ "${_git}" == "true" ]]; then
   makedepends+=(
     'git'
