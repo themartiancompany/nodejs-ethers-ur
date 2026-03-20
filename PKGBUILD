@@ -45,12 +45,19 @@ fi
 if [[ ! -v "_npm" ]]; then
   if [[ "${_evmfs}" == "true" ]]; then
     _npm="true"
-    _git_service="github"
+    if [[ ! -v "_git_service" ]]; then
+      _git_service="github"
+    fi
   elif [[ "${_evmfs}" == "false" ]]; then
     _npm="false"
     _git="false"
-    _git_service="gitlab"
+    if [[ ! -v "_git_service" ]]; then
+      _git_service="gitlab"
+    fi
   fi
+fi
+if [[ ! -v "_git" ]]; then
+  _git="false"
 fi
 if [[ ! -v "_source" ]]; then
   if [[ "${_npm}" == "true" ]]; then
@@ -103,7 +110,7 @@ _pkg=ethers
 pkgname="${_node}-${_pkg}"
 pkgver=6.13.2
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=14
+pkgrel=15
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
@@ -152,10 +159,10 @@ _tarname="${_pkg}-${_tag}"
 _tarfile="${_tarname}.${_archive_format}"
 _npm_sum="f6c68a31f674674e4aed782c4f08d7a4ec8bc04738eee38d3e22ec94e129000e"
 _npm_sig_sum="c788b68873bf6bf5cdbceae61aa51f4a8b453033c31550179fe0ea27185271d2"
-_github_sum="075a261daa20d7560e764327e0abd4d3eecba11909f03a8cee4d39aad6dea945"
-_github_sig_sum="ac168c73698197e4b70125e5a6fd1afb962bc28d78075f3c498035cf8f973094"
-_gitlab_sum="SKIP"
-_gitlab_sig_sum="SKIP"
+_github_sum="a255933401617a93cc9210b2322be2051e066ece04f1e8079473b08124f97f63"
+_github_sig_sum="8844dddcded71ab4203e4ab05b99530953dbdeb6d431bb8feda9b3f06b9beff0"
+_gitlab_sum="b1934d75e33e4ab2933022ef7be90ac2a2a5f390dff0b1b2c58784b56870e950"
+_gitlab_sig_sum="b34f5ffead2bede58bc93d214ac0dcab765d0df38bf8ea40503276342a36bd69"
 _bundle_sum="SKIP"
 _bundle_sig_sum="SKIP"
 if [[ "${_npm}" == "true" ]]; then
@@ -208,6 +215,17 @@ if [[ "${_evmfs}" == "true" ]]; then
     _sig_sum="${_npm_sig_sum}"
   elif [[ "${_npm}" == "false" ]]; then
     if [[ "${_git}" == "true" ]]; then
+      if [[ "${_bundle_sum}" == "SKIP" ]]; then
+        _msg=(
+          "Only the NPM binary"
+	  "release of this package"
+	  "has been published on the EVMFS."
+        )
+        echo \
+          "${_msg[*]}"
+	return \
+          1
+      fi
       _uri="${_bundle_uri}"
       _sum="${_bundle_sum}"
       _sig_src="${_bundle_sig_src}"
