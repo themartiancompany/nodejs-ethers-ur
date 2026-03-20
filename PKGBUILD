@@ -113,7 +113,7 @@ pkgname=(
 )
 pkgver=6.13.2
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=17
+pkgrel=18
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
@@ -290,7 +290,7 @@ build() {
   # )
   if [[ "${_npm}" == "false" ]]; then
     cd \
-      "${_tarname}"
+      "${_pkg}.js-${_tag}"
     # mkdir \
     #   -p \
     #   "build"
