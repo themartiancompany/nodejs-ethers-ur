@@ -962,9 +962,9 @@ jobs:
             ${{ github.event.release.upload_url }}
             # ${{ steps.create_release.outputs.upload_url }}
           asset_path:
-            "evm-wallet-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
+            "nodejs-ethers-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
           asset_name:
-            "dogeos-android-evm-wallet-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
+            "dogeos-android-nodejs-ethers-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
           asset_content_type:
             application/gzip
   arch_release:
@@ -1676,9 +1676,9 @@ jobs:
             ${{ github.event.release.upload_url }}
             # ${{ steps.create_release.outputs.upload_url }}
           asset_path:
-            "evm-wallet-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
+            "nodejs-ethers-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
           asset_name:
-            "dogeos-gnu-evm-wallet-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
+            "dogeos-gnu-nodejs-ethers-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
           asset_content_type:
             application/gzip
   msys2_release:
@@ -2127,9 +2127,9 @@ jobs:
             ${{ github.event.release.upload_url }}
             # ${{ steps.create_release.outputs.upload_url }}
           asset_path:
-            "evm-wallet-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
+            "nodejs-ethers-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
           asset_name:
-            "dogeos-windows-evm-wallet-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
+            "dogeos-windows-nodejs-ethers-${{ steps.version.outputs.version }}-any.pkg.tar.xz"
           asset_content_type:
             application/gzip
 

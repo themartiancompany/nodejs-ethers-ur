@@ -115,7 +115,7 @@ pkgname=(
 pkgver=6.13.2
 _pkgver=6.13.1
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=24
+pkgrel=25
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
