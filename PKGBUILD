@@ -107,13 +107,14 @@ if [[ ! -v "_archive_format" ]]; then
 fi
 _node="nodejs"
 _pkg=ethers
+_pkg_npm="${_pkg}.js"
 pkgbase="${_node}-${_pkg}"
 pkgname=(
   "${pkgbase}"
 )
 pkgver=6.13.2
 _commit="1a51af85397283601db77ca61d5596b145e7f2cb"
-pkgrel=19
+pkgrel=20
 _pkgdesc=(
   "A complete, compact and simple library"
   "for Ethereum and ilk, written in TypeScript."
@@ -125,7 +126,7 @@ arch=(
   "any"
 )
 _http="https://${_git_http}.com"
-url="${_http}/${_ns}/${_pkg}.js"
+url="${_http}/${_ns}/${_pkg_npm}"
 license=(
   "MIT"
 )
@@ -290,7 +291,7 @@ build() {
   # )
   if [[ "${_npm}" == "false" ]]; then
     cd \
-      "${_pkg}.js-${_tag}"
+      "${_pkg_npm}-${_tag}"
     # mkdir \
     #   -p \
     #   "build"
@@ -305,7 +306,7 @@ build() {
     npm \
       pack
     mv \
-      "${_pkg}-${pkgver}.tgz" \
+      "${_pkg_npm}-${pkgver}.tgz" \
       "${srcdir}"
   fi
 }
