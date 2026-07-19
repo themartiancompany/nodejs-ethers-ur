@@ -47,6 +47,9 @@ if [[ ! -v "_evmfs" ]]; then
     _evmfs="false"
   fi
 fi
+if [[ ! -v "_git_service" ]]; then
+  _git_service="github"
+fi
 if [[ ! -v "_npm" ]]; then
   if [[ "${_evmfs}" == "true" ]]; then
     _npm="true"
